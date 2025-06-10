@@ -201,6 +201,16 @@ INPUT ./images/mlfq.png
 INPUT ./page-5.tex
 INPUT ./page-5.tex
 INPUT page-5.tex
+INPUT ./images/iterative.png
+INPUT ./images/iterative.png
+INPUT ./images/iterative.png
+INPUT ./images/iterative.png
+INPUT ./images/iterative.png
+INPUT ./images/recursive.png
+INPUT ./images/recursive.png
+INPUT ./images/recursive.png
+INPUT ./images/recursive.png
+INPUT ./images/recursive.png
 INPUT cheatsheet.aux
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb

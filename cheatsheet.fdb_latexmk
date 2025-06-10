@@ -1,5 +1,5 @@
 # Fdb version 4
-["pdflatex"] 1749310546.75082 "/Users/admin/Desktop/compsys-cheatsheet/cheatsheet.tex" "cheatsheet.pdf" "cheatsheet" 1749310548.85603 0
+["pdflatex"] 1749575634.61012 "/Users/admin/Desktop/compsys-cheatsheet/cheatsheet.tex" "cheatsheet.pdf" "cheatsheet" 1749575637.1322 0
   "/Users/admin/Desktop/compsys-cheatsheet/cheatsheet.tex" 1749298128.41683 1362 b8193141736b54c5f12e01c25ffee186 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -98,16 +98,18 @@
   "/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1739782119.72138 5467645 128b85b7cde5f5edc5cb7f1dd7ff8736 ""
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1739782065 8221424 e304aa26e004f04b75896a756295b3f4 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
-  "cheatsheet.aux" 1749310548.75048 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
+  "cheatsheet.aux" 1749575637.02543 32 77e0dffd05b653a64f0caf3eb9bb454a "pdflatex"
   "cheatsheet.tex" 1749298128.41683 1362 b8193141736b54c5f12e01c25ffee186 ""
   "images/blocks.png" 1743926132.19245 77330 77417b386e10a318e1f4a2d52f749fd5 ""
   "images/dma.png" 1743945000.88881 191565 23239169af281d1ee353c3fa9c4a12da ""
+  "images/iterative.png" 1749564365.70486 277371 f9d5967cff8a11abe55845ce9dcfc86e ""
   "images/mem_img.png" 1743749080.74828 169912 9d945e81073a52305375a30a6b61d480 ""
   "images/mlfq.png" 1743947696.42857 35805 05d26ab4a24c220c18a31918cd2ac270 ""
   "images/multi-level-indexing.png" 1743929192.52359 276462 3877fd65ebba0f49e236edb1f4dde978 ""
   "images/paging.png" 1743844699.30049 147329 48909ed49d049a6f3a6decbd8b8cc424 ""
   "images/raid5.png" 1743945936.65728 126180 d750f31a1ce7c64566b79e69af5735f2 ""
   "images/read.png" 1743935584.27637 135450 465b648962e6a570774ab4ebcdd93719 ""
+  "images/recursive.png" 1749564265.7365 292579 dc7d9e9e870d76db151e2ae846f3b3cf ""
   "images/soft-hard.png" 1743923776.99285 1032384 00397e4688179996eb4e34089871c266 ""
   "images/thread_state.png" 1743754780.35201 135192 092885f0c5734d18173fed29dcf5fa20 ""
   "images/tlb.png" 1743846177.70573 211596 cc455c8bd1b018d58f879c820a9fc0ec ""
@@ -116,7 +118,7 @@
   "page-2.tex" 1749298088.68922 11336 d6a9a69f71bb7ae3696d561301826930 ""
   "page-3.tex" 1749297906.44598 12475 f27c0a59c628c22fdcc25e928fd5290b ""
   "page-4.tex" 1749298607.82177 16216 affd77b0a671caef58856a698c7069ec ""
-  "page-5.tex" 1749310533.32139 7167 d5a0170da929f6b4ecd7de21dbf7a9cd ""
+  "page-5.tex" 1749575634.4319 15899 965ee59ededa3ccf4bba52d497fa00c7 ""
   "title-page.tex" 1749297640.43494 808 a8f3bb54359ec70980da81cd5c12641c ""
   (generated)
   "cheatsheet.aux"
