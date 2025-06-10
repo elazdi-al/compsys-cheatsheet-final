@@ -1,0 +1,91 @@
+\hspace{-20px}
+\begin{minipage}[htp]{0.5\textwidth}
+
+    \noindent\textbf{UDP (User Datagram Protocol):} Connectionless, unreliable transport protocol.
+    \begin{itemize}[noitemsep,nolistsep,topsep=-10px,partopsep=0pt,parsep=0pt]
+        \item[-] \textbf{Characteristics:} No connection establishment, no reliability guarantees, no flow/congestion control, minimal overhead.
+        \item[-] \textbf{Header Structure (8 bytes total):}
+        \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+            \item Source Port: 16 bits
+            \item Destination Port: 16 bits  
+            \item Length: 16 bits (UDP header + data length)
+            \item Checksum: 16 bits (optional in IPv4, mandatory in IPv6)
+        \end{itemize}
+    \end{itemize}
+    \vspace{10px}
+    \noindent\textbf{TCP Protocol Essentials.} Transmission Control Protocol provides reliable, ordered delivery over unreliable networks.
+    \begin{itemize}[noitemsep,nolistsep,topsep=-10px,partopsep=0pt,parsep=0pt]
+        \item[-] \textbf{Three-Way Handshake:} Connection establishment process.
+        \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+            \item \textbf{Step 1:} Client sends SYN with initial sequence number (ISN)
+            \item \textbf{Step 2:} Server responds with SYN-ACK (server ISN + ACK of client ISN+1)
+            \item \textbf{Step 3:} Client sends ACK (acknowledges server ISN+1)
+        \end{itemize}
+        \item[-] \textbf{Sequence Number (SEQ):} 32-bit field identifying byte position in data stream. Initial value chosen randomly. Each byte of data increments SEQ by 1. Used for ordering and duplicate detection.
+        \item[-] \textbf{Acknowledgment Number (ACK):} 32-bit field indicating next expected sequence number from sender.
+   \item[-] \textbf{Congestion Window (cwnd):} TCP sender's estimate of how many bytes can be sent without causing network congestion, dynamically adjusted based on network conditions.
+        \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+            \item \textbf{Purpose:} Controls sending rate to prevent network overload and packet loss due to buffer overflow at intermediate routers.
+            \item \textbf{Relationship:} $\boxed{\text{Effective Window} = \min(\text{cwnd}, \text{rwnd})}$ where rwnd = receiver advertised window.
+        \end{itemize}
+        \begin{center}
+        \boxed{\text{ACK} = \text{last\_received\_SEQ} + 1}
+        \end{center}
+        Cumulative acknowledgment (acknowledges all data up to ACK-1).
+        \item[-] \textbf{Maximum Segment Size (MSS):} Largest amount of data bytes that TCP can send in a single segment, excluding TCP and IP headers.
+        \begin{center}
+        \boxed{\text{MSS} = \text{MTU} - \text{IP\_header\_size} - \text{TCP\_header\_size}}
+        \end{center}
+        where MTU = Maximum Transmission Unit of the network path (typically 1500 bytes for Ethernet), IP header = 20 bytes (without options), TCP header = 20 bytes (without options). Standard Ethernet MSS = 1460 bytes. MSS is negotiated during TCP connection establishment via MSS option in SYN segments.
+        
+        \item[-] \textbf{Timeout Calculation:} TCP adaptively calculates retransmission timeout to balance quick recovery from lost packets with avoiding unnecessary retransmissions due to network delay variations.
+        \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+            \item \textbf{SampleRTT:} Measured time for a specific segment to be sent and acknowledged (not retransmitted segments)
+            \item \textbf{EstimatedRTT:} Exponentially weighted moving average of RTT samples to smooth out fluctuations
+            \item \textbf{DevRTT:} Estimate of RTT variation to account for network jitter and delay variability
+        \end{itemize}
+        \begin{center}
+        \boxed{\text{EstimatedRTT} = (1-\alpha) \times \text{EstimatedRTT} + \alpha \times \text{SampleRTT}}
+        \end{center}
+        where $\alpha$ = smoothing factor for RTT estimation (typically 0.125)
+        \begin{center}
+        \boxed{\text{DevRTT} = (1-\beta) \times \text{DevRTT} + \beta \times |\text{SampleRTT} - \text{EstimatedRTT}|}
+        \end{center}
+        where $\beta$ = smoothing factor for deviation estimation (typically 0.25)
+        \begin{center}
+        \boxed{\text{TimeoutInterval} = \text{EstimatedRTT} + 4 \times \text{DevRTT}}
+        \end{center}
+                \item[-] \textbf{Checksum:} 16-bit Internet checksum. Computed over TCP header, data, and pseudo-header (source IP, dest IP, protocol, TCP length). Uses 1's complement arithmetic.
+                \item[-] \textbf{TCP Congestion Control (Tahoe \& Reno):} Algorithms that dynamically adjust sending rate to prevent network congestion while maximizing throughput.
+        \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+            \item \textbf{Common Phases (Both Algorithms):}
+            \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+                \item \textbf{Slow Start:} $\boxed{\text{cwnd} = \text{cwnd} + \text{MSS}}$ for each ACK. Exponential growth until cwnd $\geq$ ssthresh.
+                \item \textbf{Congestion Avoidance:} $\boxed{\text{cwnd} = \text{cwnd} + \frac{\text{MSS}^2}{\text{cwnd}}}$ for each ACK. Linear growth.
+                \item \textbf{Fast Retransmit vs No Fast Retransmit:}
+                \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+                    \item \textbf{Enabled:} Upon 3 duplicate ACKs, immediately retransmit lost segment. Faster recovery, reduced latency.
+                    \item \textbf{Disabled:} Must wait for timeout expiration to detect and retransmit lost segments. Slower recovery, higher latency.
+                \end{itemize}
+            \end{itemize}
+            \item \textbf{Loss Recovery (Key Difference):}\\
+             \begin{minipage}[htp]{0.48\textwidth}
+             \textbf{Tahoe (Conservative):}
+             \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+                 \item \textbf{Timeout / 3 Dup ACKs:}\\   ssthresh = cwnd/2, \\cwnd = MSS (slow start)
+                 \item \textbf{Behavior:}\\ Always returns to slow start after ANY loss
+             \end{itemize}
+             \end{minipage}
+             \hfill
+             \begin{minipage}[htp]{0.48\textwidth}
+             \textbf{Reno (Adaptive):}
+             \begin{itemize}[noitemsep,nolistsep,topsep=-5px,partopsep=0pt,parsep=0pt]
+                 \item \textbf{Timeout:}\\ssthresh = cwnd/2, \\cwnd = MSS (slow start)
+                 \item \textbf{3 Dup ACKs:} \\ssthresh = cwnd/2, \\cwnd = ssthresh + 3×MSS \\(fast recovery)
+                 \item \textbf{Behavior:}\\ Distinguishes mild vs severe congestion
+             \end{itemize}
+             \end{minipage}\\
+            \item \textbf{Summary:} Tahoe always returns to slow start after any loss (conservative). Reno uses fast recovery for mild congestion (3 dup ACKs) but slow start for severe congestion (timeout).
+        \end{itemize}
+      \end{itemize}
+\end{minipage}
